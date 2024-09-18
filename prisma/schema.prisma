@@ -18,10 +18,10 @@ model User {
   name        String
   email       String    @unique
   password    String?
-  accountType String
-  image       String
+  accountType String?
+  image       String?
   about       String?
-  city        String
+  city        String?
   services    Service[]
   contacts    Contact[]
   createdAt   DateTime  @default(now())
