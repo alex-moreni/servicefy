@@ -3,7 +3,7 @@
 import { getUserInfo } from "@/actions/get-info-user"
 import AdditionalInfo from "@/components/additional-info"
 import { Button } from "@/components/ui/button"
-import { signOut, useSession } from "next-auth/react"
+import { useSession } from "next-auth/react"
 import { useEffect, useState } from "react"
 
 interface User {
@@ -16,8 +16,6 @@ interface User {
 export default function Home() {
   const { data: session } = useSession()
   const [user, setUser] = useState<User>({} as User)
-
-  const handleLogoutClick = () => signOut()
 
   useEffect(() => {
     if (!session?.user) {
@@ -39,8 +37,6 @@ export default function Home() {
 
   return (
     <div>
-      <h1>{session?.user?.name}</h1>
-      <Button onClick={handleLogoutClick}>Sair</Button>
       {user.email && user.id && (
         <AdditionalInfo id={user.id} email={user.email} />
       )}

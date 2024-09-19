@@ -2,8 +2,8 @@
 
 import Link from "next/link"
 import Image from "next/image"
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar"
-import { useSession } from "next-auth/react"
+import { Avatar, AvatarImage } from "./ui/avatar"
+import { signOut, useSession } from "next-auth/react"
 import { Sheet, SheetTrigger } from "./ui/sheet"
 import { MenuIcon, Search } from "lucide-react"
 import MobileSidebar from "./mobile-sidebar"
@@ -16,6 +16,8 @@ const Header = () => {
   const [search, setSearch] = useState("")
 
   const handleSubmit = () => {}
+
+  const handleLogoutClick = () => signOut()
 
   return (
     <header className="flex items-center justify-between bg-[#5669FF] p-5">
@@ -34,7 +36,7 @@ const Header = () => {
 
       <form
         onSubmit={handleSubmit}
-        className="hidden w-[400px] bg-white md:flex"
+        className="hidden w-[370px] bg-white sm:flex md:w-[400px]"
       >
         <Input
           placeholder="O que você está procurando?"
@@ -47,15 +49,34 @@ const Header = () => {
       </form>
 
       <div className="flex items-center space-x-3">
-        <Avatar>
-          <AvatarImage
-            src={
-              session?.user?.image ||
-              "https://definicion.de/wp-content/uploads/2019/07/perfil-de-usuario.png"
-            }
-            className="object-cover"
-          />
-        </Avatar>
+        {!session?.user && (
+          <Link href={"/auth"} className="flex items-center gap-3 text-white">
+            Entrar
+          </Link>
+        )}
+
+        {session?.user && (
+          <Button
+            onClick={handleLogoutClick}
+            className="hidden text-white md:block"
+            variant={"destructive"}
+          >
+            Sair
+          </Button>
+        )}
+
+        {session?.user && (
+          <Avatar>
+            <AvatarImage
+              src={
+                session?.user?.image ||
+                "https://definicion.de/wp-content/uploads/2019/07/perfil-de-usuario.png"
+              }
+              className="object-cover"
+            />
+          </Avatar>
+        )}
+
         <Sheet>
           <SheetTrigger>
             {" "}
