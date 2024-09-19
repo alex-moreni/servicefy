@@ -41,7 +41,9 @@ export default function Home() {
     <div>
       <h1>{session?.user?.name}</h1>
       <Button onClick={handleLogoutClick}>Sair</Button>
-      {user.email && user.id && <AdditionalInfo />}
+      {user.email && user.id && (
+        <AdditionalInfo id={user.id} email={user.email} />
+      )}
     </div>
   )
 }

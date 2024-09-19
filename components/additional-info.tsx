@@ -11,8 +11,10 @@ import axios from "axios"
 import { Button } from "./ui/button"
 import Modal from "./modal"
 import { Label } from "./ui/label"
+import { addInfoUser } from "@/actions/add-info-user"
+import { toast } from "sonner"
 
-const AdditionalInfo = () => {
+const AdditionalInfo = ({ id, email }: any) => {
   const [optionRole, setOptionRole] = useState("")
   const [optionUserUF, setOptionUserUF] = useState("")
   const [optionUserCity, setOptionUserCity] = useState("")
@@ -51,6 +53,21 @@ const AdditionalInfo = () => {
     }
     fetch()
   }, [optionUserUF])
+
+  const saveInfoCepAndRole = async () => {
+    try {
+      await addInfoUser({
+        id,
+        email,
+        accountType: optionRole,
+        city: optionUserCity,
+      })
+      toast.success("Informações adicionais salvas com sucesso!")
+      closeModal()
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return (
     <Modal isOpen={modalOpen} onClose={closeModal}>
@@ -151,7 +168,11 @@ const AdditionalInfo = () => {
               Voltar
             </Button>
           )}
-          {optionUserCity && <Button variant={"outline"}>Salvar</Button>}
+          {optionUserCity && (
+            <Button onClick={saveInfoCepAndRole} variant={"outline"}>
+              Salvar
+            </Button>
+          )}
         </div>
       </main>
     </Modal>
