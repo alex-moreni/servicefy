@@ -90,3 +90,10 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+@media (min-width: 1024px) {
+  .custom-scrollbar {
+    scrollbar-width: thick;
+    scrollbar-color: #6c53d2 #fff;
+  }
+}
