@@ -9,6 +9,7 @@ import { useEffect, useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import QuickSearch from "@/components/quick-search"
+import CardSpecialist from "@/components/card-specialist"
 
 interface User {
   id: string
@@ -80,6 +81,14 @@ export default function Home() {
           </h2>
           <QuickSearch />
         </header>
+
+        <section>
+          <h2 className="mb-3 mt-6 text-xs font-bold uppercase text-gray-400">
+            Melhores profissionais
+          </h2>
+
+          <CardSpecialist quantity={8} />
+        </section>
       </div>
 
       {user.email && user.id && (
