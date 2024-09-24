@@ -1,12 +1,17 @@
 import { db } from "@/lib/prisma"
 import { MapPin } from "lucide-react"
 
-const CardSpecialist = async ({ quantity }: { quantity: number }) => {
+interface CardSpecialistProps {
+  quantity: number
+  index: number
+}
+
+const CardSpecialist = async ({ quantity, index }: CardSpecialistProps) => {
   const specialists = await db.user.findMany({})
 
   return (
     <div className="lg:grid-ro mt-4 flex items-center gap-6 overflow-x-auto lg:grid-cols-2 lg:flex-wrap lg:justify-center [&::-webkit-scrollbar]:hidden">
-      {specialists.slice(0, quantity).map((specialist, index) => (
+      {specialists.slice(index, quantity + index).map((specialist, index) => (
         <div
           className="h-[350px] w-[270px] cursor-pointer rounded-lg shadow-xl"
           key={index}

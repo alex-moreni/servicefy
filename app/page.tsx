@@ -87,7 +87,32 @@ export default function Home() {
             Melhores profissionais
           </h2>
 
-          <CardSpecialist quantity={8} />
+          <CardSpecialist quantity={8} index={0} />
+        </section>
+
+        <Link
+          href="/freelancers"
+          className="mt-6 flex justify-evenly rounded-sm bg-[#5669ff] p-5 md:items-center md:justify-between"
+        >
+          <h1 className="max-w-[70%] text-center text-lg font-semibold text-white md:text-2xl md:uppercase">
+            Temos os melhores profissionais para o seu projeto, em diversos
+            lugares do Brasil.
+          </h1>
+          <Image
+            src={"/img-map.svg"}
+            alt=""
+            width={80}
+            height={80}
+            className="rounded-lg bg-white p-1"
+          />
+        </Link>
+
+        <section>
+          <h2 className="mb-3 mt-6 text-xs font-bold uppercase text-gray-400">
+            Usuários mais ativos
+          </h2>
+
+          <CardSpecialist index={9} quantity={8} />
         </section>
       </div>
 
